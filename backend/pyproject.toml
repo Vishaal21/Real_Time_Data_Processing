@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "paralell-task-processing"
+version = "0.1.0"
+description = ""
+authors = ["Vishal <singhvishal1821@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["standard"], version = "^0.115.0"}
+sqlalchemy = "^2.0.35"
+python-dotenv = "^1.0.1"
+uvicorn = "^0.31.0"
+python-multipart = "^0.0.12"
+psycopg2 = "^2.9.9"
+asyncpg = "^0.29.0"
+alembic = "^1.13.3"
+celery = "^5.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+run = "uvicorn app.main:app --reload"

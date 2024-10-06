@@ -1,0 +1,6 @@
+__pycache__/
+venv/
+temp_files/
+backend/dataaa.json
+node_modules/
+
