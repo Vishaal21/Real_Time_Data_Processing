@@ -3,4 +3,5 @@ venv/
 temp_files/
 **dataaa.json
 node_modules/
+.env
 
