@@ -12,10 +12,6 @@ app.include_router(router)
 app.include_router(websocket_router)
 
 
-origins = [
-    "https://hoppscotch.io/"
-]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

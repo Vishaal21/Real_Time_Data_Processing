@@ -34,7 +34,7 @@ class FileMetadata (Base):
     file_size = Column(String)
     file_type = Column(String)
     upload_date = Column(Date)
-    is_valid = Column(Boolean)
+    is_valid = Column(Boolean, default=False)
     validation_message = Column(String)
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)

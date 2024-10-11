@@ -1,18 +1,26 @@
 from fastapi import WebSocket
+import aio_pika
+import os
 
-class WebSocketManager:
+from fastapi import WebSocket
+from typing import List
+
+class WebsocketManager:
     def __init__(self):
-        self.active_connections: dict[str, WebSocket] = {}
+        self.active_connections: List[WebSocket] = []
 
     async def connect(self, websocket: WebSocket):
         await websocket.accept()
-        self.active_connections[websocket.client] = websocket
+        self.active_connections.append(websocket)
 
-    def disconnect(self, websocket: WebSocket):
-        del self.active_connections[websocket.client]
+    async def disconnect(self, websocket: WebSocket):
+        self.active_connections.remove(websocket)
+        await websocket.close()
 
-    async def send_message(self, message: str):
-        for connection in self.active_connections.values():
+    async def broadcast(self, message: str):
+        for connection in self.active_connections:
             await connection.send_text(message)
+            
+    
 
-websocket_manager = WebSocketManager()
+websocket_manager = WebsocketManager()

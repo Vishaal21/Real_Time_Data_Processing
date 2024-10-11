@@ -30,6 +30,7 @@ def add_file_metadata(file, db, temp_file_path) -> str:
             raise HTTPException(status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, detail="File size should be less than 10MB")
         
         file_size = f"{file_size_in_mb:.2f} MB"
+        
         query = insert(models.FileMetadata).values(file_name=file.filename, file_size=file_size, file_type=file.content_type, upload_date=datetime.now(), file_path=temp_file_path).returning(models.FileMetadata.id)
         result = db.execute(query)
         file_metadata_id = result.fetchone()[0]
@@ -42,4 +43,9 @@ def add_file_metadata(file, db, temp_file_path) -> str:
         handle_exception(e)
         raise e
 
-
+def convert_date_format(date_string):
+    # Parse the input date string
+    date_object = datetime.strptime(date_string, "%m-%d-%Y")
+    
+    # Format the date object to the desired output string format
+    return date_object.strftime("%Y-%m-%d")

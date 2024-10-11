@@ -11,6 +11,7 @@ import os, logging
 from tempfile import NamedTemporaryFile
 import shutil
 from app.utils import add_file_metadata
+from app.utils import convert_date_format
 
 router = APIRouter(prefix="/api/v1")
 
@@ -19,8 +20,11 @@ router = APIRouter(prefix="/api/v1")
 def create_file_metadata(file: UploadFile, db: Session = Depends(get_db)):
     try:
 
+
         # Create a named temporary file
         with NamedTemporaryFile(delete=False, suffix='.json') as temp_file:
+            # Copy the file content to the temporary file
+            # 
             shutil.copyfileobj(file.file, temp_file)
             temp_file_path = temp_file.name
 
@@ -28,7 +32,6 @@ def create_file_metadata(file: UploadFile, db: Session = Depends(get_db)):
         logging.info(f"Temporary file size: {os.path.getsize(temp_file_path) / 1024 / 1024:.2f} MB")
         
         file_metadata_id = add_file_metadata(file, db, temp_file_path)
-        
         
         # Send the path of the temporary file to the Celery task
         process_file.delay(temp_file_path, file_metadata_id)
@@ -65,10 +68,20 @@ def get_security_data(file_metadata_id: int, db: Session = Depends(get_db)):
         result = db.execute(query)
         security_data = result.scalars().fetchall()
         
+        modified_data = [
+            {
+                "c": security.Close,
+                "o": security.Open,
+                "h": security.High,
+                "l": security.Low,
+                "x": convert_date_format(security.Date), 
+            } 
+            for security in security_data]
+        
         if not security_data:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Security data not found")
         
-        return security_data
+        return modified_data
     except HTTPException as e:
         return handle_http_exception(e)
     except Exception as e:
