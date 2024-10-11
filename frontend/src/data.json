@@ -1,0 +1,50 @@
+[
+    {
+        "file_size": "0.44 MB",
+        "file_name": "json_data.json",
+        "file_path": null,
+        "upload_date": null,
+        "created_at": "2024-10-06T21:38:06.372087",
+        "id": 67,
+        "file_type": "application/json",
+        "is_valid": null,
+        "validation_message": null,
+        "updated_at": "2024-10-06T21:38:06.372087"
+    },
+    {
+        "file_size": "0.44 MB",
+        "file_name": "json_data.json",
+        "file_path": null,
+        "upload_date": null,
+        "created_at": "2024-10-06T21:47:58.650405",
+        "id": 68,
+        "file_type": "application/json",
+        "is_valid": null,
+        "validation_message": null,
+        "updated_at": "2024-10-06T21:47:58.650405"
+    },
+    {
+        "file_size": "0.44 MB",
+        "file_name": "json_data.json",
+        "file_path": null,
+        "upload_date": null,
+        "created_at": "2024-10-06T21:54:35.717977",
+        "id": 69,
+        "file_type": "application/json",
+        "is_valid": null,
+        "validation_message": null,
+        "updated_at": "2024-10-06T21:54:35.717977"
+    },
+    {
+        "file_size": "0.44 MB",
+        "file_name": "json_data.json",
+        "file_path": "C:\\Users\\Vishal\\AppData\\Local\\Temp\\tmpl47u0g7v.json",
+        "upload_date": "2024-10-06",
+        "created_at": "2024-10-06T21:57:05.545294",
+        "id": 70,
+        "file_type": "application/json",
+        "is_valid": null,
+        "validation_message": null,
+        "updated_at": "2024-10-06T21:57:05.545294"
+    }
+]
