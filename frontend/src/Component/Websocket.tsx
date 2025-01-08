@@ -17,7 +17,7 @@ const WebSocketComponent = ({
   const [isConnected, setIsConnected] = useState(true);
   const ws = useRef<WebSocket | null>(null);
   const [socket, setSocket] = useState(true);
-  const notify = (message: string) => toast.success(message, {duration: 5000});
+  const notify = (message: string) => toast.success(message, {duration: 10000});
 
   useEffect(() => {
     if (socket) {
@@ -41,10 +41,10 @@ const WebSocketComponent = ({
       ws.current.onmessage = (event: MessageEvent) => {
 
         const data = JSON.parse(event.data) as Message;
-
-        console.log("dataaaaa", data);
-         setIsTableDataValid();
+        console.log("message received from websocket");
         notify(data.message);
+
+        setIsTableDataValid();
 
         // 
 

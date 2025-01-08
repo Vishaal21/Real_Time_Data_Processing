@@ -14,9 +14,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import data from "./data.json";
 import WebSocketComponent from "./Component/Websocket";
-import LoadingComponent from "./Component/Loading";
 
 interface FileMetadata {
   file_size: string;
@@ -49,6 +47,10 @@ function App() {
     second: "2-digit",
     hour12: true,
   };
+
+  function reloadPage() {
+    window.location.reload();
+  }
 
   const fetchFileMetadata: any = async () => {
     try {
@@ -102,7 +104,8 @@ function App() {
 
       if (response.status == 200 || response.status == 201) {
         console.log("File uploaded successfully:", response.data);
-        fetchFileMetadata();
+        // fetchFileMetadata();
+        // window.location.reload();
       }
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -224,7 +227,7 @@ function App() {
           </button>
         </Card>
       )}
-      {<WebSocketComponent setIsTableDataValid={() => fetchFileMetadata()} />}
+      {<WebSocketComponent setIsTableDataValid={() => {fetchFileMetadata(); }} />}
       <Card
         style={{
           width: "95%",
@@ -244,7 +247,7 @@ function App() {
           zIndex: 1000,
         }}
       >
-        {loading && (
+        {/* {loading && (
           <div
             style={{
               display: "flex",
@@ -258,7 +261,7 @@ function App() {
               File is processing...
             </Typography>
           </div>
-        )}
+        )} */}
 
         <Typography
           variant="h5"
