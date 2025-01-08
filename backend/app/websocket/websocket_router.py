@@ -34,10 +34,14 @@ async def consume_rabbitmq():
 
 @router.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
+    
+    # connect to websocket
     await websocket_manager.connect(websocket)
 
+    # consume from rabbitmq
     rabbitmq_task = asyncio.create_task(consume_rabbitmq())
 
+    # receive data from websocket
     try:
         while True:
             try:

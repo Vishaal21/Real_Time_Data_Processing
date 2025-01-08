@@ -20,7 +20,6 @@ router = APIRouter(prefix="/api/v1")
 def create_file_metadata(file: UploadFile, db: Session = Depends(get_db)):
     try:
 
-
         # Create a named temporary file
         with NamedTemporaryFile(delete=False, suffix='.json') as temp_file:
             # Copy the file content to the temporary file

@@ -19,15 +19,7 @@ from datetime import datetime
 from app.validations import Validation
 import asyncio, time
 
-# from backend.app.websocket import websocket_manager
-
-load_dotenv()
-
 file_keys = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
-
-print("os.getenv('CELERY_BACKEND')")
-
-
 
 load_dotenv()
 
@@ -59,6 +51,7 @@ def process_file(temp_file_path, file_metadata_id):
                 
                 for error in validation_result['errors']:
                     send_message_to_websocket_queue.delay(json.dumps({"message":error, "is_valid": False}))
+                    break
                 
                 return
             
@@ -94,6 +87,7 @@ async def async_send_message_to_websocket_queue(message):
         
         # creates a connection to rabbit mq
         connection = await connect_robust("amqp://guest:guest@localhost//")
+        
         async with connection:
             channel = await connection.channel()
             await channel.default_exchange.publish(
