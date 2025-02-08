@@ -1,15 +1,17 @@
-from fastapi import FastAPI
-from app.router import router
-from app.models import Base
-from app.database import engine
-from app.websocket.websocket_router import router as websocket_router
-from fastapi import middleware
+from fastapi import FastAPI, middleware
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.exceptions.global_exception_filter import global_exception_handler
+
+# from app.websocket.websocket_router import router as websocket_router
+from app.routers.file_router import file_router
 
 app = FastAPI()
-app.include_router(router)
-app.include_router(websocket_router)
+
+app.add_exception_handler(Exception, global_exception_handler)
+
+app.include_router(file_router)
+# app.include_router(websocket_router)
 
 
 app.add_middleware(
@@ -19,12 +21,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.on_event("startup")
-def startup_event():
-    Base.metadata.create_all(bind=engine)
-
-
-
-

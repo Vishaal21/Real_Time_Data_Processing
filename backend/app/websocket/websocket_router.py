@@ -1,27 +1,27 @@
+import asyncio
+import json
+import logging
+
 from aio_pika import connect_robust
 from fastapi import APIRouter, WebSocket
-from app.websocket.websocket_manager import websocket_manager
-from fastapi import WebSocket
 from starlette.websockets import WebSocketDisconnect
-import logging
-import json, logging
-from app.websocket.websocket_manager import websocket_manager
-import asyncio
 
+from app.websocket.websocket_manager import websocket_manager
 
 router = APIRouter()
+
 
 async def consume_rabbitmq():
     try:
         connection = await connect_robust("amqp://guest:guest@localhost//")
         async with connection:
             channel = await connection.channel()
-            queue = await channel.declare_queue('websocket_queue', durable=True)
+            queue = await channel.declare_queue("websocket_queue", durable=True)
             async with queue.iterator() as queue_iter:
                 async for message in queue_iter:
                     async with message.process():
                         try:
-                            data = json.loads(message.body.decode('utf-8'))
+                            data = json.loads(message.body.decode("utf-8"))
                             print("Received message:", data)
                             await websocket_manager.broadcast(json.dumps(data))
                         except json.JSONDecodeError:
@@ -34,7 +34,6 @@ async def consume_rabbitmq():
 
 @router.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
-    
     # connect to websocket
     await websocket_manager.connect(websocket)
 
@@ -56,8 +55,8 @@ async def websocket_endpoint(websocket: WebSocket):
         rabbitmq_task.cancel()
         await websocket_manager.disconnect(websocket)
         print(f"WebSocket connection closed for client")
- 
-        
+
+
 # @router.post("/testing_websocket")
 # def websocket_testing_route(input: dict):
 #     try:
@@ -65,4 +64,4 @@ async def websocket_endpoint(websocket: WebSocket):
 #         return {"message": input}
 #     except Exception as e:
 #         logging.error("Error occurred in websocket_testing_route: %s", e)
-        # raise HTTPException(status_code=500, detail="Internal Server Error")
+# raise HTTPException(status_code=500, detail="Internal Server Error")

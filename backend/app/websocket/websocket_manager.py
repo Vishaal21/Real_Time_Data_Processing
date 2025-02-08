@@ -1,9 +1,9 @@
-from fastapi import WebSocket
-import aio_pika
 import os
-
-from fastapi import WebSocket
 from typing import List
+
+import aio_pika
+from fastapi import WebSocket
+
 
 class WebsocketManager:
     def __init__(self):
@@ -20,7 +20,6 @@ class WebsocketManager:
     async def broadcast(self, message: str):
         for connection in self.active_connections:
             await connection.send_text(message)
-            
-    
+
 
 websocket_manager = WebsocketManager()

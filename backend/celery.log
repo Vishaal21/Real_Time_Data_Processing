@@ -1,21 +1,10 @@
-[2024-10-08 16:58:35,344: INFO/MainProcess] Task app.celery.celery_tasks.process_file[fa408b09-3d0d-446f-b327-d1cad7496c99] received
-[2024-10-08 16:58:35,360: ERROR/MainProcess] ["time data '10/04/2024' does not match format '%m-%d-%Y'"]
-[2024-10-08 16:58:35,361: WARNING/MainProcess] temp_file_path deleted
-[2024-10-08 16:58:35,361: WARNING/MainProcess] db session closed
-[2024-10-08 16:58:35,479: INFO/MainProcess] Task app.celery.celery_tasks.process_file[fa408b09-3d0d-446f-b327-d1cad7496c99] succeeded in 0.13999999999941792s: None
-[2024-10-08 17:02:04,024: INFO/MainProcess] Task app.celery.celery_tasks.process_file[6d5e9e14-785c-4c80-af76-b089c94381b2] received
-[2024-10-08 17:02:04,770: WARNING/MainProcess] temp_file_path deleted
-[2024-10-08 17:02:04,770: WARNING/MainProcess] db session closed
-[2024-10-08 17:02:04,822: INFO/MainProcess] Task app.celery.celery_tasks.process_file[6d5e9e14-785c-4c80-af76-b089c94381b2] succeeded in 0.7970000000022992s: None
-[2024-10-08 17:07:25,062: INFO/MainProcess] Task app.celery.celery_tasks.process_file[e76b5f19-f743-4891-a16a-1f4d65a93cd9] received
-[2024-10-08 17:07:25,794: WARNING/MainProcess] temp_file_path deleted
-[2024-10-08 17:07:25,795: WARNING/MainProcess] db session closed
-[2024-10-08 17:07:25,866: INFO/MainProcess] Task app.celery.celery_tasks.process_file[e76b5f19-f743-4891-a16a-1f4d65a93cd9] succeeded in 0.7970000000022992s: None
-[2024-10-08 17:10:54,133: INFO/MainProcess] Task app.celery.celery_tasks.process_file[50c86da0-73f5-4144-b4fe-87b6b77a3d4c] received
-[2024-10-08 17:10:55,217: WARNING/MainProcess] temp_file_path deleted
-[2024-10-08 17:10:55,218: WARNING/MainProcess] db session closed
-[2024-10-08 17:10:55,313: INFO/MainProcess] Task app.celery.celery_tasks.process_file[50c86da0-73f5-4144-b4fe-87b6b77a3d4c] succeeded in 1.1709999999984575s: None
-[2024-10-08 17:12:51,319: INFO/MainProcess] Task app.celery.celery_tasks.process_file[e963e8ac-a853-4edf-84f7-59a2ada27f4a] received
-[2024-10-08 17:12:52,464: WARNING/MainProcess] temp_file_path deleted
-[2024-10-08 17:12:52,465: WARNING/MainProcess] db session closed
-[2024-10-08 17:12:52,554: INFO/MainProcess] Task app.celery.celery_tasks.process_file[e963e8ac-a853-4edf-84f7-59a2ada27f4a] succeeded in 1.2339999999967404s: None
+[2025-02-08 16:37:21,743: INFO/MainProcess] Task process_json_data[b88801f9-d39a-4260-a649-90faa74b6919] received
+[2025-02-08 16:37:22,382: WARNING/MainProcess] temp_file_path deleted
+[2025-02-08 16:37:22,382: WARNING/MainProcess] db session closed
+[2025-02-08 16:37:22,386: INFO/MainProcess] Task send_message_to_websocket_queue[71bd18d2-0628-4265-8612-9836cae00933] received
+[2025-02-08 16:37:22,387: WARNING/MainProcess] Sending message:
+[2025-02-08 16:37:22,387: WARNING/MainProcess]  
+[2025-02-08 16:37:22,387: WARNING/MainProcess] {"message": "File Processed", "is_valid": true}
+[2025-02-08 16:37:22,394: WARNING/MainProcess] Message sent successfully!
+[2025-02-08 16:37:22,437: INFO/MainProcess] Task process_json_data[b88801f9-d39a-4260-a649-90faa74b6919] succeeded in 0.6930991080007516s: None
+[2025-02-08 16:37:22,445: INFO/MainProcess] Task send_message_to_websocket_queue[71bd18d2-0628-4265-8612-9836cae00933] succeeded in 0.058081511000636965s: None

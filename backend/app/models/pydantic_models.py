@@ -1,5 +1,7 @@
-from pydantic import BaseModel
 from datetime import date
+
+from pydantic import BaseModel
+
 
 class SecurityCreate(BaseModel):
     name: str
@@ -9,7 +11,8 @@ class SecurityCreate(BaseModel):
     low_price: str
     volume: str
     date: date
-    
+
+
 class FileMetadataCreate(BaseModel):
     file_name: str
     file_path: str
@@ -18,8 +21,3 @@ class FileMetadataCreate(BaseModel):
     upload_date: date
     is_valid: bool
     validation_message: str
-    
-
-    
-
-

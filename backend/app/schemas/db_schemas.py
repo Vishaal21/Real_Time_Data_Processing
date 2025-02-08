@@ -1,15 +1,14 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float, Date, DateTime
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 
+from sqlalchemy import Boolean, Column, Date, DateTime, ForeignKey, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
 
-class Security (Base):
+class Security(Base):
     __tablename__ = "security"
-
     id = Column(Integer, primary_key=True)
     Name = Column(String, index=True)
     Open = Column(String, index=True)
@@ -20,14 +19,18 @@ class Security (Base):
     Date = Column(String, index=True)
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
-    
-    # Foreign key to FileMetadata
-    file_metadata_id = Column(Integer, ForeignKey("file_metadata.id"))
-    file_metadata = relationship("FileMetadata", back_populates="securities")
-    
-class FileMetadata (Base):
-    __tablename__ = "file_metadata"
 
+    # Foreign key to FileMetadata
+    file_metadata_id = Column(
+        Integer, ForeignKey("file_metadata.id", ondelete="CASCADE")
+    )
+
+    # Relationship to FileMetadata
+    file_metadata = relationship("FileMetadata", back_populates="securities")
+
+
+class FileMetadata(Base):
+    __tablename__ = "file_metadata"
     id = Column(Integer, primary_key=True, autoincrement=True)
     file_name = Column(String)
     file_path = Column(String)
@@ -38,5 +41,8 @@ class FileMetadata (Base):
     validation_message = Column(String)
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
-    
-    securities = relationship("Security", back_populates="file_metadata")
+
+    # Relationship to Security
+    securities = relationship(
+        "Security", back_populates="file_metadata", cascade="all, delete-orphan"
+    )
